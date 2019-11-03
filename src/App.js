@@ -1,11 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 function App() {
-  return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
-  );
+  const [text, setText] = useState("World");
+  return <div className="hello">Hello {text}</div>;
 }
 
 export default App;
