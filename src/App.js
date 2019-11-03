@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
+import RestaurantListPage from "./RestaurantListPage";
 
 function App() {
-  const [text, setText] = useState("World");
-  return <div className="hello">Hello {text}</div>;
+  return (
+    <div>
+      <RestaurantListPage />
+    </div>
+  );
 }
 
 export default App;
