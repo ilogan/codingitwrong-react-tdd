@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import { Button } from "react-materialize";
 import NewRestaurantForm from "./NewRestaurantForm";
 import RestaurantList from "./RestaurantList";
 
@@ -18,12 +19,12 @@ function RestaurantListPage() {
 
   return (
     <div>
-      <button
+      <Button
         data-testid="addRestaurantButton"
         onClick={handleShowNewRestaurantForm}
       >
         Add Restaurant
-      </button>
+      </Button>
       {showNewRestaurantForm ? (
         <NewRestaurantForm onSave={handleAddRestaurant} />
       ) : null}
