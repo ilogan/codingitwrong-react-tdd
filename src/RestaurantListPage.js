@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Button } from "react-materialize";
+import { Button, Row } from "react-materialize";
 import NewRestaurantForm from "./NewRestaurantForm";
 import RestaurantList from "./RestaurantList";
 
@@ -19,16 +19,22 @@ function RestaurantListPage() {
 
   return (
     <div>
-      <Button
-        data-testid="addRestaurantButton"
-        onClick={handleShowNewRestaurantForm}
-      >
-        Add Restaurant
-      </Button>
-      {showNewRestaurantForm ? (
-        <NewRestaurantForm onSave={handleAddRestaurant} />
-      ) : null}
-      <RestaurantList restaurantNames={restaurantNames} />
+      <Row>
+        <Button
+          data-testid="addRestaurantButton"
+          onClick={handleShowNewRestaurantForm}
+        >
+          Add Restaurant
+        </Button>
+      </Row>
+      <Row>
+        {showNewRestaurantForm ? (
+          <NewRestaurantForm onSave={handleAddRestaurant} />
+        ) : null}
+      </Row>
+      <Row>
+        <RestaurantList restaurantNames={restaurantNames} />
+      </Row>
     </div>
   );
 }
