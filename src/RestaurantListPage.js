@@ -1,37 +1,34 @@
 import React, { useState } from "react";
 
 import { Button, Row } from "react-materialize";
+import Modal from "./components/materialize/Modal";
 import NewRestaurantForm from "./NewRestaurantForm";
 import RestaurantList from "./RestaurantList";
 
 function RestaurantListPage() {
   const [restaurantNames, setRestaurantNames] = useState([]);
-  const [showNewRestaurantForm, setNewRestaurantForm] = useState(false);
+  const [newRestaurantModal, setNewRestaurantModal] = useState(null);
 
   const handleAddRestaurant = newRestaurantName => {
     setRestaurantNames([newRestaurantName, ...restaurantNames]);
-    setNewRestaurantForm(false);
-  };
-
-  const handleShowNewRestaurantForm = () => {
-    setNewRestaurantForm(true);
+    newRestaurantModal.close();
   };
 
   return (
     <div>
-      <Row>
-        <Button
-          data-testid="addRestaurantButton"
-          onClick={handleShowNewRestaurantForm}
-        >
-          Add Restaurant
-        </Button>
-      </Row>
-      <Row>
-        {showNewRestaurantForm ? (
-          <NewRestaurantForm onSave={handleAddRestaurant} />
-        ) : null}
-      </Row>
+      <Modal
+        modal={{
+          setModal: setNewRestaurantModal,
+          instance: newRestaurantModal
+        }}
+        header="New Restaurant"
+        trigger={
+          <Button data-testid="addRestaurantButton">Add restaurant</Button>
+        }
+        footer="Cancel"
+      >
+        <NewRestaurantForm onSave={handleAddRestaurant} />
+      </Modal>
       <Row>
         <RestaurantList restaurantNames={restaurantNames} />
       </Row>

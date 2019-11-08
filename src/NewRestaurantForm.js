@@ -8,6 +8,7 @@ function NewRestaurantForm({ onSave }) {
   const handleSave = e => {
     e.preventDefault();
     onSave(inputText);
+    setInputText("");
   };
 
   return (
