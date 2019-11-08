@@ -6,7 +6,7 @@ describe("adding a restaurant", () => {
     cy.visit("http://localhost:1234");
 
     // user does not see a form for adding a restaurant
-    cy.get("[data-testid='newRestaurantName']").should("not.exist");
+    cy.get("[data-testid='newRestaurantName']").should("not.be.visible");
 
     // they click add restaurant button to get started
     cy.get("[data-testid='addRestaurantButton']").click();
@@ -20,7 +20,7 @@ describe("adding a restaurant", () => {
     cy.get("[data-testid='saveNewRestaurantButton']").click();
 
     // the form disappears
-    cy.get("[data-testid='newRestaurantName']").should("not.exist");
+    cy.get("[data-testid='newRestaurantName']").should("not.be.visible");
 
     // and user confirms that their restaurant is displayed
     cy.contains(restaurantName);
