@@ -66,7 +66,7 @@ function Modal({
       {setTrigger()}
 
       {/* <!-- Modal Structure --> */}
-      <div data-testid="modal" className="modal">
+      <div className="modal">
         <div className="modal-content">
           <h4>{header}</h4>
           {children}
