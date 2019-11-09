@@ -17,6 +17,8 @@ function RestaurantListPage() {
   return (
     <div>
       <Modal
+        data-testid="addRestaurantModal"
+        id="addRestaurantModal"
         modal={{
           setModal: setNewRestaurantModal,
           instance: newRestaurantModal

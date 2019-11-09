@@ -11,6 +11,17 @@ describe("adding a restaurant", () => {
     // they click add restaurant button to get started
     cy.get("[data-testid='addRestaurantButton']").click();
 
+    // they accidentally click cancel
+    cy.get(".modal")
+      .contains("Cancel")
+      .click();
+
+    // the form disappears
+    cy.get("[data-testid='newRestaurantName']").should("not.be.visible");
+
+    // they click add restaurant button again
+    cy.get("[data-testid='addRestaurantButton']").click();
+
     // an input box pops up, so they enter the name of their favorite sushi place
     cy.get("[data-testid='newRestaurantName']").type(restaurantName, {
       force: true
