@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { string } from "postcss-selector-parser";
-//import M from "materialize-css";
+import M from "materialize-css";
 function Modal({
   trigger,
   children,
