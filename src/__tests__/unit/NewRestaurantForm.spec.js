@@ -23,5 +23,23 @@ describe("<NewRestaurantForm/>", () => {
 
       expect(saveHandler).toBeCalledWith(restaurantName);
     });
+
+    it("clears the text field", () => {
+      const saveHandler = jest.fn();
+      const { getByTestId } = render(
+        <NewRestaurantForm onSave={saveHandler} />
+      );
+      const restaurantName = "Sushi Place";
+
+      fireEvent.change(getByTestId("newRestaurantName"), {
+        target: { value: restaurantName }
+      });
+
+      expect(getByTestId("newRestaurantName").value).toBe(restaurantName);
+
+      fireEvent.click(getByTestId("saveNewRestaurantButton"));
+
+      expect(getByTestId("newRestaurantName").value).toBe("");
+    });
   });
 });
