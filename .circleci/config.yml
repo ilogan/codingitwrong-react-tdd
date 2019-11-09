@@ -6,3 +6,5 @@ workflows:
     jobs:
       - cypress/run:
           yarn: true
+          start: yarn start
+          wait-on: "http://localhost:1234"
