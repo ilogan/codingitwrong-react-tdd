@@ -3,7 +3,7 @@ import React from "react";
 import { Button, TextInput, Row } from "react-materialize";
 import { Formik } from "formik";
 
-function NewRestaurantForm({ onSave }) {
+function NewRestaurantForm({ onSave, onCancel }) {
   const handleSave = (values, { resetForm }) => {
     const { restaurantName } = values;
     onSave(restaurantName);
@@ -18,27 +18,44 @@ function NewRestaurantForm({ onSave }) {
     return errors;
   };
 
-  const RestaurantForm = ({ values, errors, handleChange, handleSubmit }) => (
-    <form onSubmit={handleSubmit}>
-      <Row>
-        <TextInput
-          s={12}
-          className={errors.restaurantName ? "invalid" : ""}
-          label="Restaurant Name"
-          name="restaurantName"
-          value={values.restaurantName}
-          error={errors.restaurantName}
-          onChange={handleChange}
-          data-testid="newRestaurantName"
-        />
-      </Row>
-      <Row>
-        <Button data-testid="saveNewRestaurantButton" type="submit">
-          Save
-        </Button>
-      </Row>
-    </form>
-  );
+  const RestaurantForm = ({
+    values,
+    errors,
+    handleChange,
+    handleSubmit,
+    handleReset
+  }) => {
+    // find better solution using formik onReset
+    const handleCancel = () => {
+      handleReset();
+      onCancel();
+    };
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <Row>
+          <TextInput
+            s={12}
+            className={errors.restaurantName ? "invalid" : ""}
+            label="Restaurant Name"
+            name="restaurantName"
+            value={values.restaurantName}
+            error={errors.restaurantName}
+            onChange={handleChange}
+            data-testid="newRestaurantName"
+          />
+        </Row>
+        <Row>
+          <Button data-testid="saveNewRestaurantButton" type="submit">
+            Save
+          </Button>
+          <Button onClick={handleCancel} type="button">
+            Cancel
+          </Button>
+        </Row>
+      </form>
+    );
+  };
 
   return (
     <Formik

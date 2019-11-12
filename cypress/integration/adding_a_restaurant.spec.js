@@ -8,6 +8,7 @@ describe("adding a restaurant", () => {
     modalNotShownAtStart();
     modalCanBeCancelled();
     modalDisplaysValidationErrors();
+    modalClearsOutValidationErrorsWhenClosed();
     modalAllowsAddingRestaurant(restaurantName);
   });
 });
@@ -41,6 +42,30 @@ const modalDisplaysValidationErrors = () => {
   cy.get("[data-error='Cannot be blank']").should("be.visible");
 
   // click cancel
+  cy.get(".modal")
+    .contains("Cancel")
+    .click();
+};
+
+const modalClearsOutValidationErrorsWhenClosed = () => {
+  // they click add restaurant button to get started
+  cy.get("[data-testid='addRestaurantButton']").click();
+
+  // they don't type anything into the text field and hit save
+  cy.get("[data-testid='saveNewRestaurantButton']").click();
+
+  // click cancel
+  cy.get(".modal")
+    .contains("Cancel")
+    .click();
+
+  // they click add restaurant button again
+  cy.get("[data-testid='addRestaurantButton']").click();
+
+  // the validation error is dismissed
+  cy.get("[data-error='Cannot be blank']").should("not.exist");
+
+  // they click close
   cy.get(".modal")
     .contains("Cancel")
     .click();
