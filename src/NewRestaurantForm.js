@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Button, TextInput, Row } from "react-materialize";
 import { Formik } from "formik";
@@ -10,18 +10,32 @@ function NewRestaurantForm({ onSave }) {
     resetForm();
   };
 
+  const validate = values => {
+    const errors = {};
+    if (values.restaurantName === "") {
+      errors.restaurantName = "Cannot be blank";
+    }
+    return errors;
+  };
+
   return (
     <Row>
-      <Formik initialValues={{ restaurantName: "" }} onSubmit={handleSave}>
-        {({ values, handleChange, handleSubmit }) => (
+      <Formik
+        initialValues={{ restaurantName: "" }}
+        onSubmit={handleSave}
+        validate={validate}
+      >
+        {({ values, errors, handleChange, handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <TextInput
               s={12}
               m={8}
               l={10}
+              className={errors.restaurantName ? "invalid" : ""}
               label="Restaurant Name"
               name="restaurantName"
               value={values.restaurantName}
+              error={errors.restaurantName}
               onChange={handleChange}
               data-testid="newRestaurantName"
             />
