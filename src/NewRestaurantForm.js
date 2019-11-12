@@ -20,39 +20,33 @@ function NewRestaurantForm({ onSave }) {
 
   const RestaurantForm = ({ values, errors, handleChange, handleSubmit }) => (
     <form onSubmit={handleSubmit}>
-      <TextInput
-        s={12}
-        m={8}
-        l={10}
-        className={errors.restaurantName ? "invalid" : ""}
-        label="Restaurant Name"
-        name="restaurantName"
-        value={values.restaurantName}
-        error={errors.restaurantName}
-        onChange={handleChange}
-        data-testid="newRestaurantName"
-      />
-      <Button
-        s={12}
-        m={4}
-        l={2}
-        data-testid="saveNewRestaurantButton"
-        type="submit"
-      >
-        Save
-      </Button>
+      <Row>
+        <TextInput
+          s={12}
+          className={errors.restaurantName ? "invalid" : ""}
+          label="Restaurant Name"
+          name="restaurantName"
+          value={values.restaurantName}
+          error={errors.restaurantName}
+          onChange={handleChange}
+          data-testid="newRestaurantName"
+        />
+      </Row>
+      <Row>
+        <Button data-testid="saveNewRestaurantButton" type="submit">
+          Save
+        </Button>
+      </Row>
     </form>
   );
 
   return (
-    <Row>
-      <Formik
-        initialValues={{ restaurantName: "" }}
-        onSubmit={handleSave}
-        validate={validate}
-        component={RestaurantForm}
-      />
-    </Row>
+    <Formik
+      initialValues={{ restaurantName: "" }}
+      onSubmit={handleSave}
+      validate={validate}
+      component={RestaurantForm}
+    />
   );
 }
 
