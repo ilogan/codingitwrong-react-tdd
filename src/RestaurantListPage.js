@@ -14,6 +14,10 @@ function RestaurantListPage() {
     newRestaurantModal.close();
   };
 
+  const handleCancelAddRestaurant = () => {
+    newRestaurantModal.close();
+  };
+
   return (
     <div>
       <Modal
@@ -27,9 +31,11 @@ function RestaurantListPage() {
         trigger={
           <Button data-testid="addRestaurantButton">Add restaurant</Button>
         }
-        footer="Cancel"
       >
-        <NewRestaurantForm onSave={handleAddRestaurant} />
+        <NewRestaurantForm
+          onSave={handleAddRestaurant}
+          onCancel={handleCancelAddRestaurant}
+        />
       </Modal>
       <Row>
         <RestaurantList restaurantNames={restaurantNames} />

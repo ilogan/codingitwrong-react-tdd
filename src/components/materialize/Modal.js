@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import M from "materialize-css";
-function Modal({
-  trigger,
-  children,
-  header = "Header",
-  footer = "Close",
-  modal
-}) {
+function Modal({ trigger, children, header = "Header", modal }) {
   useEffect(() => {
     const elem = document.querySelector(".modal");
     const modalInstance = M.Modal.init(elem);
@@ -54,7 +48,7 @@ function Modal({
           })
         );
       default:
-        console.error("No footer supplied");
+        return;
     }
   };
 
