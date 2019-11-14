@@ -9,6 +9,7 @@ describe("adding a dish", () => {
     goToRestaurantPage(restaurantName);
     modalNotShownAtStart();
     modalAllowsAddingDish(dishName);
+    dishesRetainedWhenLeavingPage(restaurantName, dishName);
   });
 });
 
@@ -18,6 +19,12 @@ const addRestaurant = restaurantName => {
   cy.get(".modal")
     .contains("Save")
     .click();
+};
+
+const dishesRetainedWhenLeavingPage = (restaurantName, dishName) => {
+  cy.contains("Back").click();
+  cy.contains(restaurantName).click();
+  cy.contains(dishName);
 };
 
 const goToRestaurantPage = restaurantName => {
