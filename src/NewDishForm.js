@@ -4,9 +4,10 @@ import { Formik } from "formik";
 import { Button, TextInput, Row } from "react-materialize";
 
 function NewDishForm({ onSave }) {
-  const handleSave = values => {
+  const handleSave = (values, { resetForm }) => {
     const { dishName } = values;
     onSave(dishName);
+    resetForm();
   };
 
   const DishForm = ({ values, handleChange, handleSubmit }) => {
