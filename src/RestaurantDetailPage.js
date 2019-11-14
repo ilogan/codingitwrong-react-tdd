@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 
+import { connect } from "react-redux";
+import { addDish } from "./store/dishes/actions";
+
 import { Button, Row } from "react-materialize";
 import Modal from "./components/materialize/Modal";
 
 import NewDishForm from "./NewDishForm";
 import DishList from "./DishList";
 
-function RestaurantDetailPage() {
-  const [dishNames, setDishNames] = useState([]);
+function RestaurantDetailPage({ dishes, addDish }) {
+  //const [dishNames, setDishNames] = useState([]); handled by redux
   const [newDishModal, setNewDishModal] = useState(null);
 
   const handleAddDish = dishName => {
-    setDishNames([dishName, ...dishNames]);
+    addDish(dishName);
     newDishModal.close();
   };
 
@@ -28,10 +31,23 @@ function RestaurantDetailPage() {
         <NewDishForm onSave={handleAddDish} />
       </Modal>
       <Row>
-        <DishList dishNames={dishNames} />
+        <DishList dishNames={dishes} />
       </Row>
     </div>
   );
 }
 
-export default RestaurantDetailPage;
+function mapStateToProps(state) {
+  return {
+    dishes: state.dishes
+  };
+}
+
+const mapDispatchToProps = {
+  addDish
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RestaurantDetailPage);
