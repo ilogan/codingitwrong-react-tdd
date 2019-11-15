@@ -17,9 +17,9 @@ const DishItems = ({ dishNames }) =>
     <SomeDishItems dishNames={dishNames} />
   );
 
-function DishList({ dishNames }) {
+function DishList({ dishNames, restaurantName }) {
   return (
-    <Collection header="Dishes">
+    <Collection header={restaurantName}>
       <DishItems dishNames={dishNames} />
     </Collection>
   );

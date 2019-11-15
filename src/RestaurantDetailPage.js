@@ -10,12 +10,14 @@ import Modal from "./components/materialize/Modal";
 import NewDishForm from "./NewDishForm";
 import DishList from "./DishList";
 
-function RestaurantDetailPage({ dishes, addDish }) {
+function RestaurantDetailPage({ dishes, addDish, match }) {
   //const [dishNames, setDishNames] = useState([]); handled by redux
   const [newDishModal, setNewDishModal] = useState(null);
+  const restaurantName = match.params.name;
+  const dishNames = dishes[restaurantName] || [];
 
   const handleAddDish = dishName => {
-    addDish(dishName);
+    addDish({ restaurantName, dishName });
     newDishModal.close();
   };
 
@@ -35,7 +37,7 @@ function RestaurantDetailPage({ dishes, addDish }) {
         <NewDishForm onSave={handleAddDish} />
       </Modal>
       <Row>
-        <DishList dishNames={dishes} />
+        <DishList dishNames={dishNames} restaurantName={restaurantName} />
       </Row>
     </div>
   );
